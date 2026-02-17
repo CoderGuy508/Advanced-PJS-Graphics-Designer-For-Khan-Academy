@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khan PJS Graphics Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Khan Academy ProcessingJS</p>
+        <h1>Graphics Designer</h1>
+      </div>
+      <div class="status-wrap">
+        <p id="saveStatus">Autosave ready</p>
+      </div>
+    </header>
+
+    <main class="workspace-grid">
+      <aside class="panel controls-panel">
+        <h2>Tools</h2>
+        <div class="tools-grid" id="toolButtons">
+          <button class="tool-btn active" data-tool="select"><span class="icon">🖱</span><span>Select</span></button>
+          <button class="tool-btn" data-tool="brush"><span class="icon">🖌</span><span>Brush</span></button>
+          <button class="tool-btn" data-tool="pencil"><span class="icon">✏</span><span>Pencil</span></button>
+          <button class="tool-btn" data-tool="glow"><span class="icon">✨</span><span>Glow</span></button>
+          <button class="tool-btn" data-tool="spray"><span class="icon">💨</span><span>Spray</span></button>
+          <button class="tool-btn" data-tool="eraser"><span class="icon">🧽</span><span>Eraser</span></button>
+          <button class="tool-btn" data-tool="line"><span class="icon">／</span><span>Line</span></button>
+          <button class="tool-btn" data-tool="rect"><span class="icon">▭</span><span>Rect</span></button>
+          <button class="tool-btn" data-tool="ellipse"><span class="icon">◯</span><span>Ellipse</span></button>
+          <button class="tool-btn" data-tool="arc"><span class="icon">◔</span><span>Arc</span></button>
+          <button class="tool-btn" data-tool="triangle"><span class="icon">△</span><span>Triangle</span></button>
+          <button class="tool-btn" data-tool="quad"><span class="icon">⬠</span><span>Quad</span></button>
+          <button class="tool-btn" data-tool="bezier"><span class="icon">〰</span><span>Bezier</span></button>
+          <button class="tool-btn" data-tool="vertex"><span class="icon">⛶</span><span>Vertex</span></button>
+          <button class="tool-btn" data-tool="curve"><span class="icon">≈</span><span>Curve</span></button>
+          <button class="tool-btn" data-tool="fill"><span class="icon">🪣</span><span>Fill</span></button>
+        </div>
+
+        <div class="control-row">
+          <label for="colorPicker">Fill Color</label>
+          <input id="colorPicker" type="color" value="#00b7ff" />
+        </div>
+
+        <div class="control-row">
+          <label for="sizeSlider">Brush Size <span id="sizeValue">8</span></label>
+          <input id="sizeSlider" type="range" min="1" max="60" value="8" />
+        </div>
+
+        <div class="control-row">
+          <label for="strokeColorPicker">Stroke Color</label>
+          <input id="strokeColorPicker" type="color" value="#0d2238" />
+        </div>
+
+        <div class="control-row">
+          <label for="strokeWeightSlider">Stroke Weight <span id="strokeWeightValue">2</span></label>
+          <input id="strokeWeightSlider" type="range" min="1" max="40" value="2" />
+        </div>
+
+        <div class="control-row">
+          <label for="arcStartSlider">Arc Start <span id="arcStartValue">0°</span></label>
+          <input id="arcStartSlider" type="range" min="0" max="360" value="0" />
+        </div>
+
+        <div class="control-row">
+          <label for="arcStopSlider">Arc End <span id="arcStopValue">180°</span></label>
+          <input id="arcStopSlider" type="range" min="0" max="360" value="180" />
+        </div>
+
+        <div class="control-row">
+          <label for="opacitySlider">Opacity <span id="opacityValue">100%</span></label>
+          <input id="opacitySlider" type="range" min="5" max="100" value="100" />
+        </div>
+
+        <div class="control-row checkbox-row">
+          <input id="shapeFillToggle" type="checkbox" />
+          <label for="shapeFillToggle">Fill shapes</label>
+        </div>
+
+        <div class="control-row checkbox-row">
+          <input id="gradientToggle" type="checkbox" />
+          <label for="gradientToggle">Gradient fill (shapes)</label>
+        </div>
+
+        <div class="control-row">
+          <label for="gradientColorPicker">Gradient End Color</label>
+          <input id="gradientColorPicker" type="color" value="#ff8a3d" />
+        </div>
+
+        <div class="control-row">
+          <label for="gradientDirectionSelect">Gradient Direction</label>
+          <select id="gradientDirectionSelect">
+            <option value="left-right">Left → Right</option>
+            <option value="right-left">Right → Left</option>
+            <option value="top-bottom">Top → Bottom</option>
+            <option value="bottom-top">Bottom → Top</option>
+            <option value="center-out">Center → Out</option>
+            <option value="center-in">Center → In</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label>Canvas Size</label>
+          <div class="canvas-size-row">
+            <input id="canvasWidthInput" type="number" min="100" max="2000" value="400" />
+            <span>x</span>
+            <input id="canvasHeightInput" type="number" min="100" max="2000" value="400" />
+            <button id="resizeCanvasBtn">Resize</button>
+          </div>
+        </div>
+
+        <div class="selection-card">
+          <h3>Selection</h3>
+          <p id="selectionInfo">No object selected.</p>
+          <p id="pathInfo">Path tool idle.</p>
+          <div class="button-grid">
+            <button id="applyStyleBtn">Apply Style</button>
+            <button id="deleteSelectedBtn" class="danger">Delete</button>
+            <button id="finishPathBtn">Finish Path</button>
+            <button id="cancelPathBtn">Cancel Path</button>
+          </div>
+          <div class="button-grid">
+            <button id="bringForwardBtn">Forward +1</button>
+            <button id="sendBackwardBtn">Back -1</button>
+            <button id="bringToFrontBtn">To Front</button>
+            <button id="sendToBackBtn">To Back</button>
+          </div>
+          <p class="selection-help">Use <strong>Select</strong> to click or marquee-select. Move, resize, and rotate single or grouped selections with the grips.</p>
+        </div>
+
+        <div class="button-grid">
+          <button id="undoBtn">Undo</button>
+          <button id="redoBtn">Redo</button>
+          <button id="clearBtn" class="danger">Clear</button>
+          <button id="saveBtn">Save Now</button>
+          <button id="restoreBtn">Restore</button>
+          <button id="downloadPngBtn">Download PNG</button>
+        </div>
+      </aside>
+
+      <section class="panel canvas-panel">
+        <div class="canvas-stage" id="canvasStage">
+          <canvas id="drawCanvas" width="400" height="400" aria-label="Drawing canvas"></canvas>
+          <canvas id="previewCanvas" width="400" height="400" aria-hidden="true"></canvas>
+        </div>
+        <p class="canvas-note" id="canvasInfo">Canvas: 400x400</p>
+      </section>
+
+      <aside class="panel export-panel">
+        <h2>PJS Code Output</h2>
+        <p class="help-text">Output is wrapped in <code>drawArt(x, y, w, h)</code>. Enable Image Mode to include bucket fill in export.</p>
+        <div class="control-row checkbox-row">
+          <input id="imageModeToggle" type="checkbox" />
+          <label for="imageModeToggle">Image Mode Export (includes bucket fill)</label>
+        </div>
+        <div class="button-grid export-actions">
+          <button id="generatePjsBtn">Generate PJS</button>
+          <button id="copyPjsBtn">Copy PJS</button>
+          <button id="downloadPjsBtn">Download PJS</button>
+        </div>
+        <textarea id="pjsOutput" spellcheck="false" placeholder="Generated PJS code appears here..."></textarea>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

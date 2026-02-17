@@ -1,0 +1,354 @@
+:root {
+  --bg-1: #ecf6ff;
+  --bg-2: #fff5e6;
+  --panel: rgba(255, 255, 255, 0.88);
+  --panel-border: rgba(0, 138, 216, 0.28);
+  --text: #0d2238;
+  --subtext: #2f506d;
+  --accent: #00a7e1;
+  --danger: #d73b3b;
+  --shadow: 0 16px 36px rgba(22, 66, 111, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(0, 167, 225, 0.18), transparent 36%),
+    radial-gradient(circle at 88% 18%, rgba(255, 138, 61, 0.2), transparent 30%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+}
+
+.app-shell {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 14px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--subtext);
+}
+
+h1 {
+  margin: 0;
+  font-family: "Syncopate", "Trebuchet MS", sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+}
+
+.status-wrap {
+  text-align: right;
+}
+
+#saveStatus {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--subtext);
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 260px minmax(460px, 1fr) 360px;
+  gap: 10px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 9px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.tool-btn,
+button {
+  border: 1px solid rgba(0, 109, 171, 0.24);
+  background: #ffffff;
+  color: var(--text);
+  font-family: "Sora", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.icon {
+  width: 16px;
+  text-align: center;
+}
+
+.tool-btn:hover,
+button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 125, 198, 0.56);
+  box-shadow: 0 8px 16px rgba(0, 102, 163, 0.16);
+}
+
+.tool-btn.active {
+  background: linear-gradient(135deg, rgba(0, 167, 225, 0.16), rgba(255, 138, 61, 0.18));
+  border-color: rgba(0, 118, 187, 0.66);
+}
+
+button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.control-row {
+  margin-bottom: 7px;
+}
+
+.control-row label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  margin-bottom: 4px;
+  color: var(--subtext);
+}
+
+input[type="range"],
+input[type="color"],
+input[type="number"],
+select {
+  width: 100%;
+}
+
+input[type="range"] {
+  accent-color: var(--accent);
+}
+
+input[type="color"] {
+  height: 34px;
+  border: 1px solid rgba(0, 109, 171, 0.35);
+  border-radius: 8px;
+  padding: 3px;
+  background: #fff;
+}
+
+input[type="number"] {
+  border: 1px solid rgba(0, 109, 171, 0.35);
+  border-radius: 7px;
+  padding: 6px;
+  font-family: "Sora", sans-serif;
+  font-size: 0.76rem;
+}
+
+select {
+  border: 1px solid rgba(0, 109, 171, 0.35);
+  border-radius: 7px;
+  padding: 6px;
+  font-family: "Sora", sans-serif;
+  font-size: 0.76rem;
+  background: #fff;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-row label {
+  margin: 0;
+}
+
+.canvas-size-row {
+  display: grid;
+  grid-template-columns: 1fr 18px 1fr auto;
+  gap: 4px;
+  align-items: center;
+}
+
+.canvas-size-row span {
+  text-align: center;
+  color: var(--subtext);
+  font-weight: 600;
+}
+
+.selection-card {
+  border: 1px solid rgba(0, 125, 198, 0.26);
+  border-radius: 10px;
+  padding: 8px;
+  background: rgba(245, 252, 255, 0.78);
+  margin-bottom: 8px;
+}
+
+#selectionInfo {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  color: var(--subtext);
+}
+
+#pathInfo {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  color: var(--subtext);
+}
+
+.selection-help {
+  margin: 5px 0 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: var(--subtext);
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+button.danger {
+  border-color: rgba(215, 59, 59, 0.36);
+  color: #962525;
+}
+
+.canvas-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canvas-stage {
+  width: min(100%, 780px);
+  aspect-ratio: var(--canvas-aspect, 1 / 1);
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(6, 101, 162, 0.28);
+  background:
+    linear-gradient(45deg, rgba(0, 112, 180, 0.06), rgba(255, 138, 61, 0.08)),
+    repeating-conic-gradient(from 45deg, #f7fbff 0% 25%, #eef6fc 0% 50%) 0 / 24px 24px;
+}
+
+.canvas-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#drawCanvas {
+  background: #fff;
+  touch-action: none;
+}
+
+#previewCanvas {
+  pointer-events: none;
+}
+
+.canvas-note {
+  margin: 12px 0 2px;
+  font-size: 0.78rem;
+  color: var(--subtext);
+}
+
+.export-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 620px;
+}
+
+.help-text {
+  margin: 0 0 10px;
+  font-size: 0.76rem;
+  color: var(--subtext);
+  line-height: 1.4;
+}
+
+.export-actions {
+  margin-bottom: 8px;
+}
+
+#pjsOutput {
+  width: 100%;
+  min-height: 530px;
+  resize: vertical;
+  border-radius: 12px;
+  border: 1px solid rgba(6, 101, 162, 0.3);
+  padding: 10px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.35;
+  background: rgba(255, 255, 255, 0.95);
+  color: #08253d;
+}
+
+@media (max-width: 1260px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .controls-panel,
+  .export-panel {
+    width: 100%;
+  }
+
+  .canvas-stage {
+    width: min(100%, 900px);
+  }
+
+  .export-panel {
+    min-height: 400px;
+  }
+
+  #pjsOutput {
+    min-height: 320px;
+  }
+}
